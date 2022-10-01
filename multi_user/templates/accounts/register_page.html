@@ -1,0 +1,46 @@
+
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}Register{% endblock title %}
+{% block body %}
+
+
+    <div class="container">
+    
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form action="" method="POST" novalidate class="shadow p-5">
+                    {% csrf_token %}
+                   
+                    {% for fm in form %}
+                    <div class="form_group mb-3">
+                        {{fm.label_tag}}{{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+                    </div>
+                    {% endfor %}
+    
+                                     <input type="submit" class="btn btn-primary mt-4" value="Signup">
+                    <br>
+    
+                    <div class="text-center text-primary fw-bold"><small>already have account ? <a href="{% url 'login' %}"
+                                class="text-danger">Login</a> </small></div>
+                    {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                    <p class="alert alert-danger my-3">{{error}}</p>
+                    {% endfor %}
+                    {% endif %}
+                </form>
+                {% if messages %}
+                {% for message in messages %}
+                <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+                {% endfor %}
+                {% endif%}
+    
+            </div>
+            
+        </div>
+    
+    
+    </div>
+
+
+{% endblock body %}

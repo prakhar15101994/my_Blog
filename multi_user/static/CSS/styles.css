@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:wght@500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  background: #24272E;
+  padding: 20px;
+}
+
+header>h1 {
+  color: white;
+  text-align: center;
+  font-size: 35px;
+  font-weight: 500;
+  font-family: Asap, sans-serif;
+}
+
+body {
+  background-color: #24272E;
+  font-family: Asap, sans-serif;
+}
+
+.container{
+    font-family: Asap,sans-serif;
+}
+
+.gradient-custom {
+    background: #ffffff;
+    font-family: Asap,sans-serif;
+}
+
+.cont{
+  font-family: Asap,'sans-serif';
+}

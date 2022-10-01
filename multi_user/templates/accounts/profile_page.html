@@ -1,0 +1,39 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}profile{% endblock title %}
+{% block body %}
+
+<br>
+<div class="container text-center">
+    {% if request.user.is_authenticated and request.user.patient %}
+    <div class="row">
+        <div class="col-sm-12 text-light bg-dark">
+           <H3> This is Patient  Dashboard </H3>
+        </div>
+        
+    </div>
+    {% else %}
+        <div class="col-sm-12 text-warning bg-dark">
+            <H3> This is Doctor  Dashboard </H3>
+            
+        </div>
+        
+        {% endif %}
+    </div>
+  
+</div><br>
+
+
+<div class="container ">
+    <div class="row">
+        <h4>Name: {{request.user.first_name}}</h4>
+        <h4>Username: {{request.user.username}}</h4>
+        <h4>Email: {{request.user.email}}</h4>
+        <h4>Address: {{request.user.address}}</h4>
+        <h4>City: {{request.user.city}}</h4>
+        <h4>State: {{request.user.state}}</h4>
+        <h4>Pincode: {{request.user.pincode}}</h4>
+        <div>
+</div>
+
+{% endblock body %}
