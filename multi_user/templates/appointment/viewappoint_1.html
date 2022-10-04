@@ -1,0 +1,32 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+{% block title %}myblog{% endblock title %}
+{% block body %}
+<br>
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-sm-12 text-dark  border border-danger">
+            <H3>Appointment Detail</H3>
+        </div>
+    </div>
+    <br>
+
+    <div class="container">
+        {% for i in data %}
+        <div class="card">
+            <div class="card__body">
+                <h4>Appointment {{forloop.counter}}</h4>
+                <h5 class="text">Doctor's Name: {{i.doctor_name.first_name}}</h5>
+                <h6 class="text">Appointment Date: {{i.app_date}}</h6>
+                <h6 class="text">Appointment start time: {{i.app_time}}</h6>
+                <h6 class="text">Appointment end time: {{i.end_time}}</h6>
+            </div>
+        </div>
+        <br>
+        
+        {% endfor %}
+    </div>
+
+
+    {% endblock body %}

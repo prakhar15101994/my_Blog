@@ -81,6 +81,7 @@ class MyUser(AbstractBaseUser,PermissionsMixin):
     city=models.CharField(max_length=50, null=True, blank=True)
     pincode=models.CharField(max_length=6,null=True, blank=True)
     state = models.CharField(choices=state_choices, max_length=255, null=True, blank=True)
+    profile_pic = models.FileField(null=True, blank=True, upload_to='images')
     patient=models.BooleanField(default=False)
     doctor=models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -96,6 +97,12 @@ class MyUser(AbstractBaseUser,PermissionsMixin):
 
     def __str__(self):
         return self.email
+    
+    # @property
+    # def profile_image(self):
+    #     if self.profile_pic :
+    #         return self.profile_image.url
+    #     return ''
 
 
     def has_perm(self, perm, obj=None):
@@ -142,6 +149,24 @@ class Blog(models.Model):
             return self.blog_image.url
         return ''
     
+
+SPECIALITY = (('Orthopedics', 'Orthopedics'),
+              ('Obstetrics and Gynecology', 'Obstetrics and Gynecology'),
+              ('Dermatology', 'Dermatology'),
+              ('Pediatrics', 'Pediatrics'),
+              ('Internal Medicine', 'Internal Medicine'))
+
+
+class Appointment(models.Model):
+    doctor_name = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='%(class)s_requests_doctor')
+    patient_name = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='%(class)s_requests_patient')
+    app_date = models.DateField()
+    app_time = models.TimeField()
+    end_time = models.TimeField()
+    speciality = models.CharField(choices=SPECIALITY, max_length=100)
+
+    def __str__(self):
+        return str(self.id)
 
 
 

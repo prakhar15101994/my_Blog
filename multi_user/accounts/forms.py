@@ -1,4 +1,4 @@
-from accounts.models import MyUser, Blog
+from accounts.models import MyUser, Blog, SPECIALITY,Appointment
 from django import forms
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserCreationForm
@@ -7,10 +7,10 @@ from django.forms.widgets import EmailInput, PasswordInput
 
 class RegisterForm(UserCreationForm):
     password1=forms.CharField(label='Password', widget=PasswordInput(attrs={'class':'form-control'}))
-    password2=forms.CharField(label='Conferm Password', widget=PasswordInput(attrs={'class':'form-control'}))
+    password2=forms.CharField(label='Confirm Password', widget=PasswordInput(attrs={'class':'form-control'}))
     class Meta:
         model=MyUser
-        fields=['username','email', 'first_name','last_name','password1','password2','address', 'city', 'pincode','state', 'patient', 'doctor']
+        fields=['username','email', 'first_name','last_name','password1','password2','address', 'city', 'pincode','state', 'profile_pic','patient', 'doctor']
         widgets={
             'username':forms.TextInput(attrs={'class':'form-control'}),
             'email':forms.EmailInput(attrs={'class':'form-control'}),
@@ -19,10 +19,11 @@ class RegisterForm(UserCreationForm):
             'passord':forms.PasswordInput(attrs={'class':'form-control'}),
             'address':forms.TextInput(attrs={'class':'form-control'}),
             'city':forms.TextInput(attrs={'class':'form-control'}),
-            'city':forms.TextInput(attrs={'class':'form-control'}),
+            'pincode':forms.TextInput(attrs={'class':'form-control'}),
             'state':forms.Select(attrs={'class':'form-control'}),
             'patient':forms.CheckboxInput(attrs={'class':'form-check-input'}),
             'doctor':forms.CheckboxInput(attrs={'class':'form-check-input'}),
+            'profile_pic':forms.FileInput(attrs={'class':'form-control'}),
             
 
         }
@@ -61,3 +62,17 @@ class BlogCreation(forms.ModelForm):
         model = Blog
         fields = ['title', 'summary',
                   'content','blog_image' ,'blog_category', 'is_draft']
+
+
+
+class AppointmentCreation(forms.ModelForm):
+    app_date = forms.DateField(label='Enter the date for the appointment: ',
+                               widget=forms.DateInput(attrs={'class': 'form-control'}))
+    app_time = forms.TimeField(
+        label='Enter the time for the appointment: ', widget=forms.TimeInput(attrs={'class': 'form-control'}))
+    speciality = forms.ChoiceField(choices=SPECIALITY,
+                                   label='Required Speciality', widget=forms.Select(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Appointment
+        fields = ['speciality', 'app_date', 'app_time']

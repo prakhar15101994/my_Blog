@@ -1,14 +1,14 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from accounts.models import MyUser, Blog
+from accounts.models import MyUser, Blog, Appointment
 class UserAdmin(BaseUserAdmin):
    
     list_display = ('username', 'email', 'first_name', 'patient', 'doctor', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('first_name','last_name', 'email', 'address', 'city','pincode', 'state')}),
+        ('Personal info', {'fields': ('first_name','last_name', 'email', 'address', 'city','pincode', 'state', 'profile_pic')}),
         ('Permissions', {'fields': ('is_admin','is_active','patient', 'doctor')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -28,4 +28,6 @@ class UserAdmin(BaseUserAdmin):
 admin.site.register(MyUser, UserAdmin)
 
 admin.site.register(Blog)
+
+admin.site.register(Appointment)
 
